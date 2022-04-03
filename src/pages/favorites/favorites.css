@@ -1,0 +1,121 @@
+.cartwrapper {
+  padding: 20px;
+}
+.carttitle {
+  font-weight: 300;
+  text-align: center;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+.topbutton {
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: filled;
+  background-color: white;
+}
+.toptext {
+  text-decoration: underline;
+  cursor: pointer;
+  margin: 0px 10px;
+}
+.bottom {
+  display: flex;
+  justify-content: space-between;
+}
+.bottominfo {
+  flex: 3;
+}
+.pro {
+  display: flex;
+  justify-content: space-between;
+}
+.producttail {
+  flex: 2;
+  display: flex;
+}
+.bottomimg {
+  width: 200px;
+}
+.details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.procolor {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+}
+.delete {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: none;
+}
+.clear {
+  background-color: white;
+  border: none;
+  text-decoration: underline;
+}
+.price {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.prosize {
+  display: flex;
+}
+.proamount {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.amountvalue {
+  font-size: 24px;
+  margin: 5px;
+}
+.proprice {
+  font-size: 30px;
+  font-weight: 200;
+}
+.hr {
+  background-color: #eee;
+  border: none;
+  height: 1px;
+}
+.summary {
+  flex: 1;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  height: 50vh;
+}
+.summarytitle {
+  font-weight: 200;
+}
+.summaryitem {
+  margin: 30px 0px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 24px;
+}
+.summarybutton {
+  width: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+}
