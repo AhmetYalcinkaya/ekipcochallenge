@@ -1,23 +1,26 @@
-import "./favorites.css";
-import { useState, useEffect } from "react";
+import "./favorites.scss";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { baseService } from "../../network/services/baseService";
+import { getFavoriteAsync } from "../../redux/FavoriteSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Favorites = () => {
-  const [favorites, setFavorites] = useState([]);
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.favorites.products);
+  const isLoading = useSelector((state) => state.favorites.isLoading);
+  const error = useSelector((state) => state.favorites.error);
+
   useEffect(() => {
-    getFavorites();
-  });
+    dispatch(getFavoriteAsync());
+  }, [dispatch]);
 
-  const getFavorites = async () => {
-    try {
-      const data = await baseService.get(`/favorites`);
+  if (isLoading) {
+    return <b>Loading...</b>;
+  }
 
-      setFavorites(data);
-    } catch (error) {
-      console.log("Get favorites error", error);
-    }
-  };
+  if (error) {
+    return <b>{error}</b>;
+  }
   return (
     <div className="cart">
       <div className="cartwrapper">
@@ -29,10 +32,10 @@ const Favorites = () => {
         </div>
         <div className="bottom">
           <div className="bottominfo">
-            <h2>Your Cart is Empty</h2>
+            <h2>Your Have No Favorites</h2>
 
             <div className="products">
-              {favorites.map((favorite, key) => (
+              {product.map((favorite, key) => (
                 <div key={key} className="card" style={{ width: "18rem" }}>
                   <img
                     src={favorite.productImage}
@@ -42,9 +45,11 @@ const Favorites = () => {
                   <div className="card-body">
                     <h5 className="card-title">{favorite.name}</h5>
                     <p className="card-text">{favorite.price}</p>
-                    <div className="addcontainer">
-                      <button className="addbutton">ADD TO CART</button>
-                    </div>
+
+                    <button className="addbutton">
+                      <i className="bi bi-heart-fill"></i>
+                      <i className="bi bi-heart"></i>
+                    </button>
                   </div>
                 </div>
               ))}

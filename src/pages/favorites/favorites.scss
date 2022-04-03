@@ -1,0 +1,27 @@
+.cartwrapper {
+  padding: 20px;
+  .carttitle {
+    font-weight: 300;
+    text-align: center;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    .topbutton {
+      padding: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      border: filled;
+      background-color: white;
+    }
+  }
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    .bottominfo {
+      flex: 3;
+    }
+  }
+}

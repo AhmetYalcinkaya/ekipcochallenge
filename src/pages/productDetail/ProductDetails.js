@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./singleproduct.css";
+import "./productDetail.scss";
 import { useParams } from "react-router-dom";
 import { baseService } from "../../network/services/baseService";
 //import { useDispatch } from "react-redux";
@@ -39,9 +39,11 @@ const Detail = () => {
             <h1 className="protitle">{product.name}</h1>
             <p className="prodesc">{product.description}</p>
             <span className="prize">{product.price} $</span>
-            <div className="profiltercontainer"></div>
             <div className="addcontainer">
-              <button className="addbutton">Add To Favorites</button>
+              <button className="addbutton">
+                <i className="bi bi-heart-fill"></i>
+                <i className="bi bi-heart"></i>Add To Favorites
+              </button>
             </div>
           </div>
         </div>

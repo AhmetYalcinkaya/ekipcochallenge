@@ -1,0 +1,37 @@
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+.card {
+  width: 12rem;
+  margin: 1rem;
+  align-items: center;
+}
+.category {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 10p;
+}
+.products {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+.addbutton {
+  width: 100%;
+  height: 50px;
+  background-color: #eef2f3;
+  color: rgb(14, 13, 13);
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: #a6e7f6;
+  }
+}

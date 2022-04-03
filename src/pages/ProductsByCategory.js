@@ -40,14 +40,11 @@ const ProductList = () => {
             />
             <div className="card-body">
               <h5 className="card-title">{product.name}</h5>
-              <p className="card-text">{product.price}</p>
-              <div className="addcontainer">
-                <Link to={`/products/${product.id}`}>
-                  <button className="addbutton">Go to Detail</button>
-                </Link>
+              <p className="card-text">{product.price} TL</p>
 
-                <button className="addbutton">ADD TO CART</button>
-              </div>
+              <Link to={`/products/${product.id}`}>
+                <button className="addbutton">Go to Detail</button>
+              </Link>
             </div>
           </div>
         ))}
