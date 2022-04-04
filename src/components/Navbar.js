@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Navbar() {
-  //const quantity = useSelector((state) => state.cart.quantity);
-
+  const product = useSelector((state) => state.favorites.products);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light shadow">
@@ -23,8 +22,12 @@ function Navbar() {
               to="/favorites"
               className="btn btn-outline-primary ms-2 px-4 rounded-pill "
             >
-              <i className="bi bi-heart-fill"></i>
-              <i className="bi bi-heart"></i> Favorites
+              {product.length > 0 ? (
+                <i className="bi bi-heart-fill"></i>
+              ) : (
+                <i className="bi bi-heart"></i>
+              )}{" "}
+              Favorites
             </Link>
           </>
         </div>

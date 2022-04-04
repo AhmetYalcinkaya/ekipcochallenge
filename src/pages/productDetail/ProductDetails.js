@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import "./productDetail.scss";
 import { useParams } from "react-router-dom";
 import { baseService } from "../../network/services/baseService";
-//import { useDispatch } from "react-redux";
-//import { addProduct } from "../../redux/CartSlice";
+import { addFavoriteAsync } from "../../redux/FavoriteSlice";
+import { useDispatch } from "react-redux";
 
 const Detail = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getDetail();
@@ -24,9 +24,9 @@ const Detail = () => {
     }
   };
 
-  // const handleClick = () => {
-  //   dispatch(addProduct({ ...product, quantity }));
-  // };
+  const handleClick = async () => {
+    await dispatch(addFavoriteAsync({ ...product, isFavorite: true }));
+  };
 
   return (
     <>
@@ -40,9 +40,16 @@ const Detail = () => {
             <p className="prodesc">{product.description}</p>
             <span className="prize">{product.price} $</span>
             <div className="addcontainer">
-              <button className="addbutton">
-                <i className="bi bi-heart-fill"></i>
-                <i className="bi bi-heart"></i>Add To Favorites
+              <button className="addbutton" onClick={handleClick}>
+                {product.isFavorite === true ? (
+                  <>
+                    <i className="bi bi-heart-fill"></i> Already in Favorites
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-heart"></i> Add To Favorites
+                  </>
+                )}
               </button>
             </div>
           </div>

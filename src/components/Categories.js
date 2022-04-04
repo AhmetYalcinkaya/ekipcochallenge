@@ -13,7 +13,6 @@ const Categories = () => {
     try {
       const data = await baseService.get("/categories");
       setCategoryList(data);
-      console.log(data);
     } catch (error) {
       console.log("Get category error", error);
     }

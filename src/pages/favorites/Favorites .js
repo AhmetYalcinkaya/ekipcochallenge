@@ -44,12 +44,11 @@ const Favorites = () => {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{favorite.name}</h5>
-                    <p className="card-text">{favorite.price}</p>
 
-                    <button className="addbutton">
+                    <div className="flex">
+                      <p className="card-text">{favorite.price} TL</p>
                       <i className="bi bi-heart-fill"></i>
-                      <i className="bi bi-heart"></i>
-                    </button>
+                    </div>
                   </div>
                 </div>
               ))}
