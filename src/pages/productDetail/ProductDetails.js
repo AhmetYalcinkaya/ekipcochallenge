@@ -20,7 +20,7 @@ const Detail = () => {
     dispatch(getDetailAsync(id));
     setIsFavorite(detail.isFavorite);
   }, [dispatch, id, detail.isFavorite]);
-
+  //loading ve error componenti oluşturup spinner ve error mesajının görünmesini sağlayabiliriz projeyi geliştirmek istersek.
   if (isLoading) {
     return <b>Loading...</b>;
   }
@@ -56,7 +56,7 @@ const Detail = () => {
           <div className="productinfo">
             <h1 className="protitle">{detail.name}</h1>
             <p className="prodesc">{detail.description}</p>
-            <span className="prize">{detail.price} $</span>
+            <span className="prize">{detail.price} TL</span>
             <div className="addcontainer">
               {isFavorite === true ? (
                 <button className="addbutton" onClick={removeHandler}>

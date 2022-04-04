@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+//thunk yapısını documanlardan araştırdığım kadarıyla böyle kullanıyoruz
 
 export const getFavoriteAsync = createAsyncThunk(
   "favorite/getFavorite",
