@@ -60,7 +60,7 @@ const Detail = () => {
             <div className="addcontainer">
               {isFavorite === true ? (
                 <button className="addbutton" onClick={removeHandler}>
-                  <i className="bi bi-heart-fill"></i> Already in Favorites
+                  <i className="bi bi-heart-fill"></i> Remove from Favorites
                 </button>
               ) : (
                 <button className="addbutton" onClick={handleClick}>
