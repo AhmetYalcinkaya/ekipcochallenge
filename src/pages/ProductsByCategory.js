@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { baseService } from "../network/services/baseService";
-// import { useDispatch } from "react-redux";
-// import { addProduct } from "../../redux/CartSlice";
+import { getProductsAsync } from "../redux/ProductsByCategorySlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const ProductList = () => {
-  const [productsList, setProductsList] = useState([]);
   const { id } = useParams();
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const productsList = useSelector(
+    (state) => state.productsbycategory.productsList
+  );
+  const isLoading = useSelector((state) => state.productsbycategory.isLoading);
+  const error = useSelector((state) => state.productsbycategory.error);
 
   useEffect(() => {
-    getCategoriesProducts();
-  });
+    dispatch(getProductsAsync(id));
+  }, [dispatch, id]);
 
-  const getCategoriesProducts = async () => {
-    try {
-      const data = await baseService.get(`/categories/${id}/products`);
+  if (isLoading) {
+    return <b>Loading...</b>;
+  }
 
-      setProductsList(data);
-    } catch (error) {
-      console.log("Get productsList error", error);
-    }
-  };
+  if (error) {
+    return <b>{error}</b>;
+  }
 
   return (
     <>

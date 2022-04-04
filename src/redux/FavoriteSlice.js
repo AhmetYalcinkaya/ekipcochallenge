@@ -24,7 +24,7 @@ export const removeFavoriteAsync = createAsyncThunk(
   "favorite/removeFavorite",
   async (id) => {
     const response = await axios.delete(
-      `${process.env.REACT_APP_API_BASE_ENDPOINT}/favorites/${id}`
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/favorites`
     );
     return response.data;
   }
@@ -37,13 +37,7 @@ export const FavoriteSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {
-    removeFavorite: (state, action) => {
-      const product = action.payload;
-      const filtered = state.products.filter((item) => item.id !== product.id);
-      state.products = filtered;
-    },
-  },
+  reducers: {},
   extraReducers: {
     //GET FAVORITE
     [getFavoriteAsync.pending]: (state) => {
@@ -74,7 +68,5 @@ export const FavoriteSlice = createSlice({
     },
   },
 });
-
-export const { removeFavorite } = FavoriteSlice.actions;
 
 export default FavoriteSlice.reducer;

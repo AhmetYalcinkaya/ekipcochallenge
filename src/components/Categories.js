@@ -1,29 +1,32 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { baseService } from "../network/services/baseService";
+import { getCategoryAsync } from "../redux/CategoriesSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Categories = () => {
-  const [categoryList, setCategoryList] = useState([]);
+  const dispatch = useDispatch();
+  const category = useSelector((state) => state.categories.category);
+  const isLoading = useSelector((state) => state.categories.isLoading);
+  const error = useSelector((state) => state.categories.error);
 
   useEffect(() => {
-    getCategories();
-  }, []);
+    dispatch(getCategoryAsync());
+  }, [dispatch]);
 
-  const getCategories = async () => {
-    try {
-      const data = await baseService.get("/categories");
-      setCategoryList(data);
-    } catch (error) {
-      console.log("Get category error", error);
-    }
-  };
+  if (isLoading) {
+    return <b>Loading...</b>;
+  }
+
+  if (error) {
+    return <b>{error}</b>;
+  }
   return (
     <div className="category">
-      {categoryList?.map((category, key) => (
+      {category.map((item, key) => (
         <div key={key} className="card">
           <div className="card-body">
-            <Link to={`/productlist/${category.id}`} className="link">
-              <h5 className="card-title">{category.name}</h5>
+            <Link to={`/productlist/${item.id}`} className="link">
+              <h5 className="card-title">{item.name}</h5>
             </Link>
           </div>
         </div>

@@ -1,31 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./productDetail.scss";
 import { useParams } from "react-router-dom";
-import { baseService } from "../../network/services/baseService";
+import { getDetailAsync } from "../../redux/DetailSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { addFavoriteAsync } from "../../redux/FavoriteSlice";
-import { useDispatch } from "react-redux";
 
 const Detail = () => {
-  const [product, setProduct] = useState({});
   const { id } = useParams();
-
   const dispatch = useDispatch();
+  const detail = useSelector((state) => state.details.detail);
+  const isLoading = useSelector((state) => state.details.isLoading);
+  const error = useSelector((state) => state.details.error);
 
   useEffect(() => {
-    getDetail();
-  }, []);
+    dispatch(getDetailAsync(id));
+  }, [dispatch, id]);
 
-  const getDetail = async () => {
-    try {
-      const data = await baseService.get(`/products/${id}`);
-      setProduct(data);
-    } catch (error) {
-      console.log("Get detail error", error);
-    }
-  };
+  if (isLoading) {
+    return <b>Loading...</b>;
+  }
+
+  if (error) {
+    return <b>{error}</b>;
+  }
 
   const handleClick = async () => {
-    await dispatch(addFavoriteAsync({ ...product, isFavorite: true }));
+    await dispatch(addFavoriteAsync({ ...detail, isFavorite: true }));
   };
 
   return (
@@ -35,17 +35,17 @@ const Detail = () => {
           <div className="productimage">
             <img
               className="proimg"
-              src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${product.productImage}`}
+              src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${detail.productImage}`}
               alt=""
             />
           </div>
           <div className="productinfo">
-            <h1 className="protitle">{product.name}</h1>
-            <p className="prodesc">{product.description}</p>
-            <span className="prize">{product.price} $</span>
+            <h1 className="protitle">{detail.name}</h1>
+            <p className="prodesc">{detail.description}</p>
+            <span className="prize">{detail.price} $</span>
             <div className="addcontainer">
               <button className="addbutton" onClick={handleClick}>
-                {product.isFavorite === true ? (
+                {detail.isFavorite === true ? (
                   <>
                     <i className="bi bi-heart-fill"></i> Already in Favorites
                   </>

@@ -1,9 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getFavoriteAsync } from "../redux/FavoriteSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Navbar() {
+  const dispatch = useDispatch();
   const product = useSelector((state) => state.favorites.products);
+  useEffect(() => {
+    dispatch(getFavoriteAsync());
+  }, [dispatch]);
+
   return (
     <div className=" bg-light">
       <nav className="navbar navbar-expand-lg navbar-light shadow">

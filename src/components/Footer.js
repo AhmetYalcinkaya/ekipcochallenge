@@ -4,12 +4,10 @@ const Footer = () => {
   return (
     <footer className="text-center text-lg-start bg-light text-muted">
       <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        {/* Left */}
         <div className="me-5 d-none d-lg-block">
           <span> Katalog App</span>
         </div>
-        {/* Left */}
-        {/* Right */}
+
         <div>
           <a href="#!" className="me-4 text-reset">
             <i className="bi bi-facebook"></i>
@@ -27,10 +25,7 @@ const Footer = () => {
             <i className="bi bi-linkedin"></i>
           </a>
         </div>
-        {/* Right */}
       </section>
-      {/* Section: Social media */}
-      {/* Section: Links  */}
 
       <div
         className="text-center p-4"

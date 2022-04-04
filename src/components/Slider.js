@@ -1,33 +1,35 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Carousel } from "react-bootstrap";
-import { baseService } from "../network/services/baseService";
 import { Link } from "react-router-dom";
+import { getSliderAsync } from "../redux/SliderSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Slider = () => {
-  const [sliders, setSliders] = useState([]);
+  const dispatch = useDispatch();
+  const slide = useSelector((state) => state.slider.slide);
+  const isLoading = useSelector((state) => state.slider.isLoading);
+  const error = useSelector((state) => state.slider.error);
 
   useEffect(() => {
-    getSliders();
-  });
+    dispatch(getSliderAsync());
+  }, [dispatch]);
 
-  const getSliders = async () => {
-    try {
-      const data = await baseService.get(`/sliders`);
+  if (isLoading) {
+    return <b>Loading...</b>;
+  }
 
-      setSliders(data);
-    } catch (error) {
-      console.log("Get sliders error", error);
-    }
-  };
+  if (error) {
+    return <b>{error}</b>;
+  }
   return (
     <div>
       <Carousel>
-        {sliders.map((slider) => (
-          <Carousel.Item key={slider.productId}>
-            <Link to={`/products/${slider.productId}`}>
+        {slide.map((item) => (
+          <Carousel.Item key={item.productId}>
+            <Link to={`/products/${item.productId}`}>
               <img
                 className="d-block w-100"
-                src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${slider.image}`}
+                src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${item.image}`}
                 alt="Third slide"
               />
             </Link>
