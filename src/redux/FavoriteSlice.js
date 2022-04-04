@@ -22,9 +22,10 @@ export const addFavoriteAsync = createAsyncThunk(
 );
 export const removeFavoriteAsync = createAsyncThunk(
   "favorite/removeFavorite",
-  async (id) => {
-    const response = await axios.delete(
-      `${process.env.REACT_APP_API_BASE_ENDPOINT}/favorites`
+  async (data) => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_API_BASE_ENDPOINT}/favorites`,
+      data
     );
     return response.data;
   }
@@ -62,9 +63,11 @@ export const FavoriteSlice = createSlice({
     },
     //REMOVE FAVORITE
     [removeFavoriteAsync.fulfilled]: (state, action) => {
-      const product = action.payload;
-      const filtered = state.products.filter((item) => item.id !== product.id);
-      state.products = filtered;
+      state.products.push(action.payload);
+    },
+    [removeFavoriteAsync.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
     },
   },
 });

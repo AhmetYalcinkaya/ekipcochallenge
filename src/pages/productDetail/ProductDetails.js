@@ -1,9 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./productDetail.scss";
 import { useParams } from "react-router-dom";
 import { getDetailAsync } from "../../redux/DetailSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavoriteAsync } from "../../redux/FavoriteSlice";
+import {
+  addFavoriteAsync,
+  removeFavoriteAsync,
+} from "../../redux/FavoriteSlice";
 
 const Detail = () => {
   const { id } = useParams();
@@ -11,10 +14,12 @@ const Detail = () => {
   const detail = useSelector((state) => state.details.detail);
   const isLoading = useSelector((state) => state.details.isLoading);
   const error = useSelector((state) => state.details.error);
+  const [isFavorite, setIsFavorite] = useState();
 
   useEffect(() => {
     dispatch(getDetailAsync(id));
-  }, [dispatch, id]);
+    setIsFavorite(detail.isFavorite);
+  }, [dispatch, id, detail.isFavorite]);
 
   if (isLoading) {
     return <b>Loading...</b>;
@@ -25,7 +30,16 @@ const Detail = () => {
   }
 
   const handleClick = async () => {
-    await dispatch(addFavoriteAsync({ ...detail, isFavorite: true }));
+    await dispatch(
+      addFavoriteAsync({ ...detail, isFavorite: true, productId: id }),
+      setIsFavorite(true)
+    );
+  };
+  const removeHandler = async () => {
+    await dispatch(
+      removeFavoriteAsync({ ...detail, isFavorite: false, productId: id }),
+      setIsFavorite(false)
+    );
   };
 
   return (
@@ -44,17 +58,15 @@ const Detail = () => {
             <p className="prodesc">{detail.description}</p>
             <span className="prize">{detail.price} $</span>
             <div className="addcontainer">
-              <button className="addbutton" onClick={handleClick}>
-                {detail.isFavorite === true ? (
-                  <>
-                    <i className="bi bi-heart-fill"></i> Already in Favorites
-                  </>
-                ) : (
-                  <>
-                    <i className="bi bi-heart"></i> Add To Favorites
-                  </>
-                )}
-              </button>
+              {isFavorite === true ? (
+                <button className="addbutton" onClick={removeHandler}>
+                  <i className="bi bi-heart-fill"></i> Already in Favorites
+                </button>
+              ) : (
+                <button className="addbutton" onClick={handleClick}>
+                  <i className="bi bi-heart"></i> Add To Favorites
+                </button>
+              )}
             </div>
           </div>
         </div>
