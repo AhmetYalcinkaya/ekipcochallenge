@@ -38,7 +38,7 @@ const Favorites = () => {
               {product.map((favorite, key) => (
                 <div key={key} className="card" style={{ width: "18rem" }}>
                   <img
-                    src={favorite.productImage}
+                    src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${favorite.productImage}`}
                     className="card-img-top"
                     alt="..."
                   />

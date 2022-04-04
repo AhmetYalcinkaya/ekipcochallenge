@@ -27,7 +27,7 @@ const Slider = () => {
             <Link to={`/products/${slider.productId}`}>
               <img
                 className="d-block w-100"
-                src="https://media.wired.com/photos/606ce52941bf976945513469/191:100/w_2086,h_1092,c_limit/Gear-Cloudburst-Jacket---Mandarin-Front-square-grey-back.jpg"
+                src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${slider.image}`}
                 alt="Third slide"
               />
             </Link>

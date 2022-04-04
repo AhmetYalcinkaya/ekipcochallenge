@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 function Navbar() {
   const product = useSelector((state) => state.favorites.products);
   return (
-    <div>
+    <div className=" bg-light">
       <nav className="navbar navbar-expand-lg navbar-light shadow">
         <div className="container">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto  mb-lg-0">
             <Link
               className="btn btn-outline-primary ms-auto px-4 rounded-pill"
               to="/"

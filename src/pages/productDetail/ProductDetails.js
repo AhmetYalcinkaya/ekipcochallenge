@@ -33,7 +33,11 @@ const Detail = () => {
       <div className="productspage">
         <div className="productwrapper">
           <div className="productimage">
-            <img className="proimg" src={product.image} alt="" />
+            <img
+              className="proimg"
+              src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${product.productImage}`}
+              alt=""
+            />
           </div>
           <div className="productinfo">
             <h1 className="protitle">{product.name}</h1>

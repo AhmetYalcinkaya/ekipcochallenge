@@ -29,7 +29,7 @@ const ProductList = () => {
         {productsList.map((product, key) => (
           <div key={key} className="card" style={{ width: "18rem" }}>
             <img
-              src={product.productImage}
+              src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${product.productImage}`}
               className="card-img-top"
               alt="..."
             />
