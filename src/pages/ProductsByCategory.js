@@ -23,11 +23,6 @@ const ProductList = () => {
     }
   };
 
-  // const handleClick = (product) => {
-  //   dispatch(addProduct({ ...product, quantity: quanty }));
-  //   setQuanty(1);
-  // };
-
   return (
     <>
       <div className="products">
