@@ -32,27 +32,29 @@ const Favorites = () => {
         </div>
         <div className="bottom">
           <div className="bottominfo">
-            <h2>Your Have No Favorites</h2>
+            {product.length === 0 ? (
+              <h2>Your Have No Favorites</h2>
+            ) : (
+              <div className="products">
+                {product.map((favorite, key) => (
+                  <div key={key} className="card" style={{ width: "18rem" }}>
+                    <img
+                      src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${favorite.productImage}`}
+                      className="card-img-top"
+                      alt="..."
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{favorite.name}</h5>
 
-            <div className="products">
-              {product.map((favorite, key) => (
-                <div key={key} className="card" style={{ width: "18rem" }}>
-                  <img
-                    src={`${process.env.REACT_APP_API_BASE_ENDPOINT}/${favorite.productImage}`}
-                    className="card-img-top"
-                    alt="..."
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{favorite.name}</h5>
-
-                    <div className="flex">
-                      <p className="card-text">{favorite.price} TL</p>
-                      <i className="bi bi-heart-fill"></i>
+                      <div className="flex">
+                        <p className="card-text">{favorite.price} TL</p>
+                        <i className="bi bi-heart-fill"></i>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
